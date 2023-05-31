@@ -10,11 +10,8 @@ body {
   }
 
   .header {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    background-color: rgb(179, 179, 121);
+      height: 6vw;
+      background-color: aqua;
 }
 
   .side-bar {
@@ -22,4 +19,15 @@ body {
     grid-row-end: 5;
     display: flex;
     background-color: blue;
+  }
+
+  .main-div{
+    display: flex;
+  }
+
+  .todo {
+    display: block;
+    width: 20vw;
+    height: 15vw;
+    border: 1px solid black;
   }
