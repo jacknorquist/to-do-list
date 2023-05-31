@@ -56,7 +56,10 @@ const pageLoad = () => {
         let titleInput = document.createElement("input");
         let descriptionInput = document.createElement("input");
         let dueDateInput = document.createElement("input");
-        let priorityInput = document.createElement("input");
+        let priorityInput = document.createElement("div");
+        let lowPriority = document.createElement("input");
+        let mediumPriority = document.createElement("input");
+        let highPriority = document.createElement("input");
         let submitForm = document.createElement("input");
 
         titleInput.placeholder = "Title";
@@ -65,6 +68,11 @@ const pageLoad = () => {
         priorityInput.placeholder = "Priority";
         submitForm.textContent = "Submit";
         submitForm.type ="submit";
+
+        lowPriority.type = "radio";
+        mediumPriority.type = "radio";
+        highPriority.type = "radio";
+
     
         
 
@@ -77,6 +85,7 @@ const pageLoad = () => {
 
         mainDiv.append(form);
         form.append(titleInput,descriptionInput,dueDateInput,priorityInput,submitForm);
+        priority.append(lowPriority, mediumPriority, highPriority);
         form.addEventListener('submit', function(){
             event.preventDefault();
             makeTask();
@@ -93,57 +102,40 @@ const pageLoad = () => {
 
 
 function appendTask() {
-    for (let i=0; i <= toDosList.length; i++) {
-        let title = toDosList[i].title;
-        let details = toDosList[i].details;
-        let due = toDosList[i].due;
-        let priority = toDosList[i].priority;
-        let toDoCard = document.createElement("div");
-        toDoCard.className = "todo";
-        toDoCard.setAttribute("id", title);
-        console.log(details);
+    for (let i =0; i<toDosList.length; i++){
+        let toDo = toDosList[i];
+
+        let toDoEl = document.createElement("div");
+        let title = document.createElement("div");
+        let details = document.createElement("div");
+        let due = document.createElement("div")
+        let priority = document.createElement("div");
+        let doneBtn = document.createElement("button")
 
 
-        let titleDiv = document.createElement("div");
-        let detailsDiv = document.createElement("div");
-        let dueDiv = document.createElement("div");
-        let priorityDiv = document.createElement("div");
+        toDoEl.className = "todo";
+        title.textContent = toDo.title;
+        details.textContent = toDo.details;
+        due.textContent = toDo.due;
+        priority.textContent = toDo.priority
+        doneBtn.type = "toggle";
 
+        title.className = "title";
+        details.className = "description";
+        due.className = "due-date";
+        priority.className = "priority";
 
-        titleDiv.textContent = title;
-        detailsDiv.textContent = details;
-        dueDiv.textContent = due;
-        priorityDiv.textContent = priority;
+        let mainDiv = document.querySelector("#main-div");
+        toDoEl.append(title, details, due, priority, doneBtn);
+        mainDiv.appendChild(toDoEl);
+    }
 
-
-
-        titleDiv.className = "title";
-        detailsDiv.className = "description";
-        dueDiv.className = "due-date";
-        priorityDiv.className = "priority";
-
-        let mainDiv = document.getElementById("main-div");
-        mainDiv.append(toDoCard);
-        toDoCard.append(titleDiv, detailsDiv, dueDiv, priorityDiv);
-    };
 };
-const removeForm = ()=>{
-    let form = document.getElementById("add-form");
-    let titleInput = document.getElementById("title");
-    let descriptionInput = document.getElementById("description");
-    let dueDateInput = document.getElementById("due-date");
-    let priorityInput = document.getElementById("priority");
-    let submitForm = document.getElementById("submit-form");
 
-    form.remove();
-    titleInput.remove();
-    descriptionInput.remove();
-    dueDateInput.remove();
-    priorityInput.remove();
-    submitForm.remove();
-    
-    form.reset();
+const removeToDo = () =>{
+    $(".todo").remove()
 }
+
  
 
 
@@ -153,4 +145,4 @@ const removeForm = ()=>{
 
 
 
-export {pageLoad, appendTask};
+export {pageLoad, appendTask, removeToDo};

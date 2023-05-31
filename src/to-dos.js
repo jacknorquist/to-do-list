@@ -1,4 +1,4 @@
-import {appendTask, removeTask, pageLoad} from "/src/pageload.js";
+import {appendTask, removeToDo} from "/src/pageload.js";
 
 class Todo {
     constructor(title, details, due, priority){
@@ -27,11 +27,10 @@ const makeTask = ()=>{
 
     count = new Todo(titleValue, descriptionValue, dueDateValue, priorityValue);
     toDosList.push(count);
-    console.log(toDosList)
-     
-     appendTask();
+    console.log(toDosList);
 
-    return{toDosList};
+    removeToDo();
+    appendTask();
 
 };
 let toDosList = [];
